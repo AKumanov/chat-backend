@@ -1,0 +1,5 @@
+redis:
+  image: redis:6
+  container_name: chat_backend_local_redis
+  ports:
+    - "6379:6379"
