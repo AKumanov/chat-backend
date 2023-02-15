@@ -30,6 +30,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['__all__', '*']
 CORS_ALLOW_ALL_ORIGINS = True
 
+AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = "users:redirect"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'channels_redis',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
+    'chat_backend.users',
+    'django_extensions',
 ]
 
 ASGI_APPLICATION = "chat_backend.asgi.application"
@@ -137,7 +142,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [

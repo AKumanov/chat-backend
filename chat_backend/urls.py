@@ -19,4 +19,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth-token/', CustomObtainAuthTokenView.as_view(), name='auth_login'),
     path('api/login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path("users/", include("chat_backend.users.urls", namespace="users")),
+]
+
+urlpatterns += [
+    path("api/", include("chat_backend.api_router")),
 ]
