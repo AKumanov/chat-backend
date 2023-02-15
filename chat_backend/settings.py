@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 
-REDIS_HOST = "redis://127.0.0.1"
+REDIS_HOST = "127.0.0.1"
 REDIS_PORT = 6379
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,7 +34,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
     'channels',
-
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'chat_backend.chats',
     'channels_redis',
-    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
 ]
 
 ASGI_APPLICATION = "chat_backend.asgi.application"
@@ -110,6 +111,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SIMPLE_JWT = {
+    'ALGORITHM': 'HS256',
+    'AUTH_HEADER_TYPES': ('Token',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5)
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -131,11 +138,18 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ]
+}
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [REDIS_HOST, REDIS_PORT],
+            "hosts": [(REDIS_HOST, int(REDIS_PORT))],
         },
     },
 }
