@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'chat_backend.users',
     'django_extensions',
+    'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 ASGI_APPLICATION = "chat_backend.asgi.application"
@@ -146,7 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 CHANNEL_LAYERS = {

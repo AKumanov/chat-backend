@@ -3,10 +3,17 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from django.contrib.auth import get_user_model
+from rest_framework import generics
+from rest_framework import viewsets
 
 from chat_backend.chats.serializers import UserSerializer
 
 User = get_user_model()
+
+
+class UserSetView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 # Create your views here.
