@@ -13,4 +13,4 @@ jobs:
        - uses: actions/checkout@v2
        - uses: actions/setup-python@v2
        - run: pip install -r requirements.txt  # install requirements to enable GitHub run our code
-       - run: pytest . # run the unit test
+       - run: python manage.py test . # run the unit test
