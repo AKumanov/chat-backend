@@ -11,4 +11,4 @@ class UserTest(TestCase):
             name="Alexander",
         )
         user.save()
-        self.assertEqual("Alexander", user.name)
+        self.assertEqual("Test Name", user.name)
